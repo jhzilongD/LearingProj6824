@@ -1,2 +1,25 @@
-pkg/
-*-handin.tar.gz
+# MapReduce临时文件
+mr-[0-9]*
+mr-out-*
+mr-tmp/
+
+# 二进制文件
+*.so
+mrcoordinator
+mrworker
+mrsequential
+
+# Go构建文件
+*.exe
+*.dll
+*.dylib
+*.test
+*.out
+
+# 编辑器文件
+.vscode/
+.idea/
+
+# 其他
+*.tar.gz
+*.log

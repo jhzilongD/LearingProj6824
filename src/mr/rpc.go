@@ -22,7 +22,45 @@ type ExampleReply struct {
 	Y int
 }
 
-// Add your RPC definitions here.
+// Task types
+type TaskType int
+
+const (
+	MapTask TaskType = iota
+	ReduceTask
+	WaitTask  // 等待其他任务完成
+	ExitTask  // 所有任务完成，worker可以退出
+)
+
+// Task information structure
+type Task struct {
+	TaskType   TaskType
+	TaskId     int      // 任务ID
+	InputFile  string   // Map任务的输入文件
+	OutputFile string   // Reduce任务的输出文件
+	NReduce    int      // Reduce任务数量
+	NMap       int      // Map任务数量
+}
+
+// Worker请求任务的RPC结构
+type GetTaskArgs struct {
+	// Worker可以发送自己的标识符，这里暂时为空
+}
+
+type GetTaskReply struct {
+	Task Task
+}
+
+// Worker报告任务完成的RPC结构
+type ReportTaskArgs struct {
+	TaskType TaskType
+	TaskId   int
+	Success  bool // 任务是否成功完成
+}
+
+type ReportTaskReply struct {
+	// 暂时为空，可以用于确认
+}
 
 
 // Cook up a unique-ish UNIX-domain socket name
